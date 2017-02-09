@@ -1,49 +1,49 @@
 // https://p5js.org/examples/simulate-particle-system.html
 
 var sketchConfig = {
-    particles: []
+    shape: 'circle',
+    color: { r: 127, g: 127, b: 127 }
 };
 
 var p5 = this;
 
 var SHAPE_FUNC = {
-    circle: function(x, y) { p5.ellipse(x, y, 14, 14); },
-    rect: function(x, y) { p5.rect(x, y, 14, 14); },
+    circle: function(x, y) { p5.ellipse(x, y, 12, 12); },
+    rect: function(x, y) { p5.rect(x, y, 12, 12); },
     cross: function(x, y) {
-        p5.strokeWeight(2);
-        p5.line(x-7, y-7, x+7, y+7);
-        p5.line(x+7, y-7, x-7, y+7);
-        p5.strokeWeight(1);
+        p5.line(x-6, y-6, x+6, y+6);
+        p5.line(x+6, y-6, x-6, y+6);
     },
     diamond: function(x, y) {
-        p5.quad(x, y-7, x+7, y, x, y+7, x-7, y);
+        p5.quad(x, y-6, x+6, y, x, y+6, x-6, y);
     }
 }
 
 var particleSystem = this;
 
 function setup() {
-    p5.createCanvas(720, 400).parent('p5-canvas');
+    p5.createCanvas(400, 400).parent('p5-canvas');
     particleSystem = new ParticleSystem(createVector(p5.width/2, 50));
     updateWithConfig(sketchConfig);
 }
 
 function draw() {
     p5.background(51);
-    particleSystem.addParticle();
     particleSystem.run();
 }
 
 function updateWithConfig(conf) {
-    sketchConfig = conf;
+    particleSystem.addParticle(conf);
 }
 
 // A simple Particle class
-var Particle = function(position) {
+var Particle = function(position, config) {
     this.acceleration = p5.createVector(0, 0.05);
     this.velocity = p5.createVector(p5.random(-1, 1), p5.random(-1, 0));
     this.position = position.copy();
     this.lifespan = 255.0;
+    this.color = config.color || { r: 127, g: 127, b: 127 };
+    this.shape = config.shape || 'circle';
 };
 
 Particle.prototype.run = function() {
@@ -60,10 +60,13 @@ Particle.prototype.update = function(){
 
 // Method to display
 Particle.prototype.display = function() {
-    p5.stroke(200, this.lifespan);
+    var fillColor = p5.color(this.color.r, this.color.g, this.color.b, this.lifespan);
+    var strokeColor = p5.lerpColor(fillColor, p5.color(255, this.lifespan), 0.5);
+    p5.stroke(strokeColor);
     p5.strokeWeight(2);
-    p5.fill(127, this.lifespan);
-    p5.ellipse(this.position.x, this.position.y, 12, 12);
+    p5.fill(fillColor);
+    //p5.ellipse(this.position.x, this.position.y, 12, 12);
+    SHAPE_FUNC[this.shape](this.position.x, this.position.y);
 };
 
 // Is the particle still useful?
@@ -80,8 +83,8 @@ var ParticleSystem = function(position) {
     this.particles = [];
 };
 
-ParticleSystem.prototype.addParticle = function() {
-    this.particles.push(new Particle(this.origin));
+ParticleSystem.prototype.addParticle = function(config) {
+    this.particles.push(new Particle(this.origin, config));
 };
 
 ParticleSystem.prototype.run = function() {

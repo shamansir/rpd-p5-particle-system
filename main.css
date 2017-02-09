@@ -1,0 +1,17 @@
+.rpd-inlet.rpd-util-number input[type=number], .rpd-outlet.rpd-util-number input[type=number] {
+    position: fixed;
+    transform: translate(-41px,9px);
+}
+
+.rpd-patch {
+    /* transform: translate(200px,150px); */
+}
+
+.rpd-util-nodelist .rpd-process * {
+    pointer-events: all;
+}
+
+.rpd-util-random .rpd-process text,
+.rpd-p5-color .rpd-process text {
+    font-size: 10px;
+}
