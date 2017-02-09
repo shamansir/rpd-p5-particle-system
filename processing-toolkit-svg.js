@@ -20,6 +20,24 @@ function toHexColor(color) {
 
 Rpd.channeltype('p5/color', { show: toHexColor });
 
+// ============= Register p5/delay node type =============
+
+Rpd.nodetype('p5/magic', {
+  inlets: {
+      'input': { type: 'core/any' }
+  },
+  outlets: {
+      'magic': { type: 'core/any' }
+  },
+  process: function(inlets) {
+       //var emitter = Kefir.emitter();
+       //emitter.emit(inlets.input);
+       return {
+           'magic': Kefir.later(1000, inlets.input) //emitter.delay(1000) //Kefir.constant(inlets.input).delay(1000)
+       }
+  }
+});
+
 // ============= Register p5/color node type and renderer =============
 
 Rpd.nodetype('p5/color', {
