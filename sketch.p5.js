@@ -4,32 +4,34 @@ var sketchConfig = {
     particles: []
 };
 
-var SHAPE_FUNC = {
-    circle: function(x, y) { ellipse(x, y, 14, 14); },
-    rect: function(x, y) { rect(x, y, 14, 14); },
-    cross: function(x, y) { strokeWeight(2);
-        line(x-7, y-7, x+7, y+7);
-        line(x+7, y-7, x-7, y+7);
-        strokeWeight(1); },
-    diamond: function(x, y) {
-        quad(x, y-7, x+7, y, x, y+7, x-7, y);
-    }
-};
-
-️var system;
-
 var p5 = this;
 
+var SHAPE_FUNC = {
+    circle: function(x, y) { p5.ellipse(x, y, 14, 14); },
+    rect: function(x, y) { p5.rect(x, y, 14, 14); },
+    cross: function(x, y) {
+        p5.strokeWeight(2);
+        p5.line(x-7, y-7, x+7, y+7);
+        p5.line(x+7, y-7, x-7, y+7);
+        p5.strokeWeight(1);
+    },
+    diamond: function(x, y) {
+        p5.quad(x, y-7, x+7, y, x, y+7, x-7, y);
+    }
+}
+
+var particleSystem = this;
+
 function setup() {
-    p5.createCanvas(720, 400);
-    system = new ParticleSystem(createVector(p5.width/2, 50));
+    p5.createCanvas(720, 400).parent('p5-canvas');
+    particleSystem = new ParticleSystem(createVector(p5.width/2, 50));
     updateWithConfig(sketchConfig);
 }
 
 function draw() {
-    p.background(51);
-    system.addParticle();
-    system.run();
+    p5.background(51);
+    particleSystem.addParticle();
+    particleSystem.run();
 }
 
 function updateWithConfig(conf) {

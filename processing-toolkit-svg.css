@@ -1,0 +1,46 @@
+#p5-canvas {
+    position: fixed;
+}
+.rpd-node .rpd-process * {
+    pointer-events: none;
+}
+.rpd-node.rpd-p5-shape .rpd-process .rpd-p5-shape-variant * {
+    pointer-events: all;
+    cursor: pointer;
+}
+.rpd-p5-shape-variant {
+    fill: black;
+    stroke: black;
+    stroke-width: 0;
+}
+.rpd-p5-shape-variant line {
+    stroke-width: 2;
+}
+.rpd-p5-shape-variant:hover {
+    fill: deepskyblue;
+    stroke: deepskyblue;
+}
+.rpd-p5-shape-variant.rpd-p5-active-variant {
+    fill: crimson;
+    stroke: crimson;
+}
+.rpd-util-random .rpd-process text {
+    font-size: 0.8em;
+    text-anchor: middle;
+    alignment-baseline: central;
+}
+.rpd-p5-sketch .rpd-inlet .rpd-value,
+.rpd-p5-sketch .rpd-inlet .rpd-name {
+    visibility: hidden;
+}
+.rpd-p5-sketch .rpd-inlet:hover .rpd-value,
+.rpd-p5-sketch .rpd-inlet:hover .rpd-name {
+    visibility: visible;
+}
+/* text.rpd-value {
+    display: none;
+}
+.rpd-inlet:hover text.rpd-value,
+.rpd-outlet:hover text.rpd-value {
+    display: inline;
+} */
