@@ -1,0 +1,19 @@
+{
+  "name": "rpd-p5-particle-system",
+  "version": "1.0.0",
+  "description": "RPD & p5.js example of particle system",
+  "main": "sketch.p5.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shamansir/rpd-p5-particle-system.git"
+  },
+  "author": "shaman.sir@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shamansir/rpd-p5-particle-system/issues"
+  },
+  "homepage": "https://github.com/shamansir/rpd-p5-particle-system#readme"
+}
