@@ -18,22 +18,37 @@ function toHexColor(color) {
         + numberToHex(color.b || 0);
 }
 
-Rpd.channeltype('p5/color', { show: toHexColor });
+Rpd.channeltype('p5/color', { allow: [ 'core/any' ], show: toHexColor });
 
 // ============= Register p5/delay node type =============
 
 Rpd.nodetype('p5/magic', {
   inlets: {
-      'input': { type: 'core/any' }
+      'input': { type: 'core/any'/*, default: Kefir.fromEvents(document.body, 'click')*/ }
   },
   outlets: {
       'magic': { type: 'core/any' }
   },
   process: function(inlets) {
-       //var emitter = Kefir.emitter();
-       //emitter.emit(inlets.input);
+       // var emitter = Kefir.emitter();
+       // setTimeout(function() {
+       //     emitter.emit(inlets.input);
+       // }, 10);
+       //var evt = inlets.input;
        return {
-           'magic': Kefir.later(1000, inlets.input) //emitter.delay(1000) //Kefir.constant(inlets.input).delay(1000)
+           'magic': Kefir.later(1000, inlets.input)
+           //'magic': emitter.map(function(color) {
+           //     return {
+           //         r: 255,
+           //         g: color.g,
+           //         b: 255
+           //     };
+           // })
+           // 'magic': {
+           //      r: 255,
+           //      g: Math.floor(evt.screenX / window.innerWidth * 255),
+           //      b: 255
+           // }
        }
   }
 });
