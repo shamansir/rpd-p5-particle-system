@@ -24,34 +24,60 @@ Rpd.channeltype('p5/color', { allow: [ 'core/any' ], show: toHexColor });
 
 Rpd.nodetype('p5/magic', {
   inlets: {
-      'input': { type: 'core/any'/*, default: Kefir.fromEvents(document.body, 'click')*/ }
+      'input': { type: 'core/any' }
   },
   outlets: {
       'magic': { type: 'core/any' }
   },
   process: function(inlets) {
-       // var emitter = Kefir.emitter();
-       // setTimeout(function() {
-       //     emitter.emit(inlets.input);
-       // }, 10);
-       //var evt = inlets.input;
        return {
            'magic': Kefir.later(1000, inlets.input)
-           //'magic': emitter.map(function(color) {
-           //     return {
-           //         r: 255,
-           //         g: color.g,
-           //         b: 255
-           //     };
-           // })
-           // 'magic': {
-           //      r: 255,
-           //      g: Math.floor(evt.screenX / window.innerWidth * 255),
-           //      b: 255
-           // }
        }
   }
 });
+
+// Rpd.nodetype('p5/magic', {
+//     inlets: {
+//         'input': { type: 'core/any' }
+//     },
+//     outlets: {
+//         'magic': { type: 'core/any' }
+//     },
+//     process: function(inlets) {
+//         var emitter = Kefir.emitter();
+//         setTimeout(function() {
+//             emitter.emit(inlets.input);
+//         }, 10);
+//         return {
+//             'magic': emitter.map(function(color) {
+//                 return {
+//                     r: 255,
+//                     g: color.g,
+//                     b: 255
+//                 };
+//             })
+//         }
+//     }
+// });
+
+// Rpd.nodetype('p5/magic', {
+//     inlets: {
+//         'input': { type: 'core/any', default: Kefir.fromEvents(document.body, 'click') }
+//     },
+//     outlets: {
+//         'magic': { type: 'core/any' }
+//     },
+//     process: function(inlets) {
+//         var evt = inlets.input;
+//         return {
+//             'magic': {
+//                  r: 255,
+//                  g: Math.floor(evt.screenX / window.innerWidth * 255),
+//                  b: 255
+//             }
+//         }
+//     }
+// });
 
 // ============= Register p5/color node type and renderer =============
 
