@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/shamansir/rpd-p5-particle-system/issues"
   },
-  "homepage": "https://github.com/shamansir/rpd-p5-particle-system#readme"
+  "homepage": "https://github.com/shamansir/rpd-p5-particle-system#readme",
+  "dependencies": {
+    "kefir": "^3.7.1",
+    "rpd": "^2.1.1"
+  }
 }

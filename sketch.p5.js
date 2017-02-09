@@ -1,7 +1,19 @@
 // https://p5js.org/examples/simulate-particle-system.html
 
-var config = {
+var sketchConfig = {
+    particles: []
+};
 
+var SHAPE_FUNC = {
+    circle: function(x, y) { ellipse(x, y, 14, 14); },
+    rect: function(x, y) { rect(x, y, 14, 14); },
+    cross: function(x, y) { strokeWeight(2);
+        line(x-7, y-7, x+7, y+7);
+        line(x+7, y-7, x-7, y+7);
+        strokeWeight(1); },
+    diamond: function(x, y) {
+        quad(x, y-7, x+7, y, x, y+7, x-7, y);
+    }
 };
 
 ️var system;
@@ -11,12 +23,17 @@ var p5 = this;
 function setup() {
     p5.createCanvas(720, 400);
     system = new ParticleSystem(createVector(p5.width/2, 50));
+    updateWithConfig(sketchConfig);
 }
 
 function draw() {
     p.background(51);
     system.addParticle();
     system.run();
+}
+
+function updateWithConfig(conf) {
+    sketchConfig = conf;
 }
 
 // A simple Particle class
